@@ -1,5 +1,5 @@
-require 'active_suport/core_ext/string'
+require "active_suport/core_ext/string"
 
 module ActiveSupport
-  autoload :Dependencies, 'active_support/dependencies'
+  autoload :Dependencies, "active_suport/dependencies"
 end

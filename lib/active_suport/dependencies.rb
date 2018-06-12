@@ -7,7 +7,7 @@ module ActiveSupport
 
     def search_for_file(name)
       autoload_paths.each do |path|
-        file = File.join(path, "{name}.rb")
+        file = File.join(path, "#{name}.rb")
         if File.file? file
           return file
         end
@@ -18,9 +18,12 @@ module ActiveSupport
 end
 
 class Module
+  remove_method :const_missing
+
   def const_missing(name)
     if file = ActiveSupport::Dependencies.search_for_file(name.to_s.underscore)
       require file.sub(/\.rb$/, '')
+
       const_get name
     else
       raise NameError, "Uninitialized constant #{name}"
